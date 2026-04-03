@@ -1,0 +1,9 @@
+services:
+  app:
+    image: ${FRONTEND_IMAGE:-ghcr.io/matheus-calixto-silva/multi-step-frontend:latest}
+    pull_policy: always
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production

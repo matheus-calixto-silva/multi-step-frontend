@@ -138,3 +138,45 @@ pnpm start
 ```
 
 > Para Docker, o `Dockerfile` usa build multi-stage com `output: standalone` para imagem enxuta. A variável `NEXT_PUBLIC_API_URL` é injetada em **build time** via `ARG`.
+
+---
+
+## CI/CD
+
+Este repositório possui os seguintes arquivos de automação:
+
+- `.github/dependabot.yml`: atualização automática de dependências `npm`, `docker` e `github-actions`
+- `.github/workflows/security-quality-checks.yml`: valida `lint`, `build` e faz scan de vulnerabilidades com Trivy
+- `.github/workflows/docker-publish.yml`: constrói e publica a imagem Docker no GitHub Container Registry (`ghcr.io`)
+
+### Publicação da imagem
+
+A workflow publica imagens em:
+
+```text
+ghcr.io/<owner>/<repo>
+```
+
+Exemplo deste projeto:
+
+```text
+ghcr.io/matheus-calixto-silva/multi-step-frontend:latest
+```
+
+> Como `NEXT_PUBLIC_API_URL` é embutida no bundle do Next.js, defina a variável de repositório `NEXT_PUBLIC_API_URL` no GitHub antes de publicar a imagem de produção.
+
+---
+
+## Produção com Docker Compose
+
+Foi adicionado um arquivo `docker-compose.prod.yml` para subir o frontend usando a imagem já publicada no registry:
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+
+Se quiser usar outra tag ou outro registry:
+
+```bash
+FRONTEND_IMAGE=ghcr.io/<owner>/<repo>:<tag> docker compose -f docker-compose.prod.yml up -d
+```

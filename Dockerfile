@@ -1,12 +1,12 @@
-FROM node:20-alpine AS deps
-RUN corepack enable && corepack prepare pnpm@latest --activate
+FROM node:20-alpine AS base
+RUN corepack enable && corepack prepare pnpm@9 --activate
 WORKDIR /app
+
+FROM base AS deps
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-FROM node:20-alpine AS builder
-RUN corepack enable && corepack prepare pnpm@latest --activate
-WORKDIR /app
+FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ARG NEXT_PUBLIC_API_URL=http://localhost:3001
