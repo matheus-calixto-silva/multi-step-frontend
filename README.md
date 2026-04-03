@@ -18,7 +18,7 @@ Interface web do fluxo de cadastro multi-step, desenvolvida como teste técnico 
 
 **1. Suba a API primeiro**
 
-Clone e inicie o backend: https://github.com/matheus-calixto-silva/multi-step-api
+Clone e inicie o backend: https://github.com/matheus-calixto-silva/multi-step-backend
 
 Siga os passos do README do repositório acima para build e execução dos containers. A API ficará disponível em `http://localhost:3001`.
 
