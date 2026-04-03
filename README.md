@@ -14,11 +14,17 @@ Interface web do fluxo de cadastro multi-step, desenvolvida como teste técnico 
 
 ## Rodando com Docker (recomendado)
 
-> O frontend é parte do `docker-compose.yml` do backend. Para rodar tudo junto:
+> Este projeto depende do backend para funcionar. Antes de iniciar o frontend, suba os containers da API.
+
+**1. Suba a API primeiro**
+
+Clone e inicie o backend: https://github.com/matheus-calixto-silva/multi-step-api
+
+Siga os passos do README do repositório acima para build e execução dos containers. A API ficará disponível em `http://localhost:3001`.
+
+**2. Suba o frontend**
 
 ```bash
-# Na pasta do backend:
-cd ../backend
 docker-compose up --build
 ```
 
